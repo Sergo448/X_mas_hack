@@ -1,26 +1,27 @@
 from striprtf.striprtf import rtf_to_text
 import re
-import os
-import tqdm
-import textract
-import ftfy
+
+with open("4db6b233fda895c3bffcb5fdc5b8e1de.rtf") as infile:
+    content = infile.read()
+    text = rtf_to_text(content)
+
+    text = text.lower()
+    words = text.split()
+    words = [word.strip('.,!;()[]') for word in words]
+    words = [word.replace("'s", '') for word in words]
+    # finding unique
+    unique = []
+    for word in words:
+        if word not in unique:
+            unique.append(word)
+            # sort
+            unique.sort()
+
+for i in range(len(unique)):
+    re.sub(r'[^\w\s]+|[\d]+', r'', unique[i]).strip()
+
+for i in range(len(unique)):
+    re.sub(r'[0-9]', r'', unique[i])
 
 
-def get_file_list(root_folder):
-    file_content = {}
-    pattern = re.compile('[\W_]')
-    file_list = [f for f in os.listdir(root_folder)]
-    for f in tqdm(file_list):
-        if "rtf" not in f:
-            f_text = textract.process(os.path.join(root_folder, f))
-            text = ftfy.ftfy((f_text).decode('utf-8'))
-        if ".rtf" in f:
-            with open(os.path.join(root_folder, f)) as infile:
-                content = infile.read()
-                text = rtf_to_text(content)
-        file_content[f] = pattern.sub(' ', text).lower().lstrip().rstrip().replace('  ', ' ')
-
-    return file_content
-
-
-text = get_file_list(root_folder='4db6b233fda895c3bffcb5fdc5b8e1de.rtf')
+print(unique)

@@ -176,3 +176,4 @@ pdfminer~=20191125
 tqdm~=4.64.1
 textract~=1.6.5
 ftfy~=6.1.1
+pypdf2~=2.12.1
