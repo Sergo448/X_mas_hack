@@ -1,15 +1,23 @@
 import os
 import docx2txt
+from subprocess import Popen, PIPE
 
-from docx import Document
 
 directory = '..//data//data_arenda'
+
+def document_to_text(filename, file_path):
+    if filename[-4:] == ".doc":
+        cmd = ['antiword', file_path]
+        p = Popen(cmd, stdout=PIPE)
+        stdout, stderr = p.communicate()
+        return stdout.decode('UTF-8', 'ignore')
 
 # Создание директории в которой будут храниться результаты
 if not os.path.isdir("..//data//csv_s//arenda"):
     os.mkdir("..//data//csv_s//arenda")
 
 i = 0
+big_list: list = []
 
 for filename in os.listdir(directory):
     if filename.endswith(".doc") or \
@@ -35,9 +43,25 @@ for filename in os.listdir(directory):
                     unique.append(word)
             # sort
             unique.sort()
-        if name.endswith('doc'):
-            pass
 
+            big_list.append(unique)
+        # working with doc
+        elif name.endswith('doc'):
+            text = document_to_text(filename=filename,
+                                    file_path=name)
+            text = text.lower()
+            words = text.split()
+            words = [word.strip('.,!;()[]') for word in words]
+            words = [word.replace("'s", '') for word in words]
+            # finding unique
+            unique = []
+            for word in words:
+                if word not in unique:
+                    unique.append(word)
+            # sort
+            unique.sort()
+
+            big_list.append(unique)
 
         save_path = '..//data//csv_s//arenda'
         completeName = os.path.join(save_path, f'data_arenda_unique_{i}' + ".csv")
