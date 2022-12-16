@@ -1,17 +1,15 @@
-import doc2text
-
-# Initialize the class.
-doc = doc2text.Document()
+import aspose.words as aw
+import aspose
 
 
-doc.read('2d4708c800dc003466fa9a8a64e2e2b7.docx')
+doc = aspose.words.Document("0ca2f9faecdbc67d6686a9f5b6636eba.doc")
+text = doc.save("Outputtt.txt")
 
-# Crop the pages down to estimated text regions, deskew, and optimize for OCR.
-doc.process()
+print(text)
 
-# Extract text from the pages.
-doc.extract_text()
-text = doc.get_text()
+# Create and save a simple document
+doc = aw.Document('0ca2f9faecdbc67d6686a9f5b6636eba.doc')
+builder = aw.DocumentBuilder(doc)
+builder.writeln("Hello Aspose.Words for Python via .NET")
 
-with open("Output.txt", "w") as text_file:
-    print(text, file=text_file)
+doc.save("out.docx")

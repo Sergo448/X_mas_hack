@@ -172,3 +172,7 @@ docx~=0.2.4
 doc2text~=0.2.4
 pypandoc~=1.10
 striprtf~=0.0.22
+pdfminer~=20191125
+tqdm~=4.64.1
+textract~=1.6.5
+ftfy~=6.1.1

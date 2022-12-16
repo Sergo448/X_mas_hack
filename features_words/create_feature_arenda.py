@@ -35,7 +35,8 @@ for filename in os.listdir(directory):
                     unique.append(word)
             # sort
             unique.sort()
-        if name.endswith('doc')
+        if name.endswith('doc'):
+            pass
 
 
         save_path = '..//data//csv_s//arenda'

@@ -5,6 +5,7 @@ import tqdm
 import textract
 import ftfy
 
+
 def get_file_list(root_folder):
     file_content = {}
     pattern = re.compile('[\W_]')
@@ -20,3 +21,6 @@ def get_file_list(root_folder):
         file_content[f] = pattern.sub(' ', text).lower().lstrip().rstrip().replace('  ', ' ')
 
     return file_content
+
+
+text = get_file_list(root_folder='4db6b233fda895c3bffcb5fdc5b8e1de.rtf')
