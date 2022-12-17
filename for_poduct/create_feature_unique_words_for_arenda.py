@@ -8,7 +8,7 @@ from striprtf.striprtf import rtf_to_text
 
 def main():
     print('Start parsing in a arenda files')
-    directory = '..//data//data_arenda'
+    directory = "..//data//data_arenda"
 
     def document_to_text(filename, file_path):
         if filename[-4:] == ".doc":
@@ -19,9 +19,8 @@ def main():
 
     # Создание директории в которой будут храниться результаты
     if not os.path.isdir("..//data//csv_s//arenda"):
-        os.mkdir("..//data//csv_s//arenda")
+        os.mkdir("..//data/csv_s//arenda")
 
-    # i = 0
     big_list: list = []
 
     for filename in os.listdir(directory):

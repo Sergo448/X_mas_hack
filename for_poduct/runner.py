@@ -13,8 +13,5 @@ def main():
     create_feature_unique_words_for_uslugi.main()
 
 
-
-
-
 if __name__ == '__main__':
     main()
